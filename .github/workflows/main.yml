@@ -1,6 +1,6 @@
 name: Run Telegram Bot
 
-on: push: branches: - main  # Runs when code is pushed to the main branch pull_request: branches: - main workflow_dispatch:  # Allows manual triggering
+on: push: branches: - main  # Runs when code is pushed to the main branch pull_request: branches: - main workflow_dispatch: # Allows manual triggering
 
 jobs: run-bot: runs-on: ubuntu-latest
 
@@ -20,5 +20,5 @@ steps:
 
   - name: Run Telegram Bot
     run: |
-      nohup python forward.py &
+      nohup python forward.py > bot.log 2>&1 &
 
