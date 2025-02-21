@@ -1,0 +1,24 @@
+name: Run Telegram Bot
+
+on: push: branches: - main  # Runs when code is pushed to the main branch pull_request: branches: - main workflow_dispatch:  # Allows manual triggering
+
+jobs: run-bot: runs-on: ubuntu-latest
+
+steps:
+  - name: Checkout Repository
+    uses: actions/checkout@v3
+
+  - name: Set up Python
+    uses: actions/setup-python@v4
+    with:
+      python-version: '3.10'
+
+  - name: Install Dependencies
+    run: |
+      python -m pip install --upgrade pip
+      if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+  - name: Run Telegram Bot
+    run: |
+      nohup python forward.py &
+
